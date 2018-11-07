@@ -5,12 +5,10 @@
  */
 package rouelibreapp;
 
-import javax.persistence.EntityManager;
+import controller.UserController;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import model.User;
-import model.User.Gender;
 
 
 /**
@@ -23,15 +21,22 @@ public class RoueLibreApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        User u = new User("morgana", "laise", "BONNNNJOUUUUUUR", "fds@lkkkkl.Com", "mdp");
-        u.setGender(Gender.FEMALE);
-        
+//        User u = new User("morgana", "laise", "BONNNNJOUUUUUUR", "fds@lkkkkl.Com", "mdp");
+//        u.setGender(Gender.FEMALE);
+//        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("roueLibreAppPU");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction transac = em.getTransaction();
-        transac.begin();
-        em.persist(u);
-        transac.commit();
+        UserController userController = new UserController(emf);
+//        userController.create(new User("Yo", "Plait", "Fromage frais", "CMonYop@gmail.com", "woké"));
+        User userRead = userController.read("CMonYop@gmail.com");
+        System.out.println(userRead.getIdUser());
+
+
+        
+//        EntityManager em = emf.createEntityManager();
+//        EntityTransaction transac = em.getTransaction();
+//        transac.begin();
+//        em.persist(u);
+//        transac.commit();
     }
     
 }

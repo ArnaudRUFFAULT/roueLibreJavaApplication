@@ -40,31 +40,39 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Adress implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idAdress")
     private Integer idAdress;
+    
     @Basic(optional = false)
     @Column(name = "country")
     private String country;
+    
     @Basic(optional = false)
     @Column(name = "streetName")
     private String streetName;
+    
     @Basic(optional = false)
     @Column(name = "streetNumber")
     private int streetNumber;
+    
     @Lob
     @Column(name = "additionalAddressDetails")
     private String additionalAddressDetails;
+    
     @Basic(optional = false)
     @Column(name = "zipCode")
     private String zipCode;
+    
     @JoinTable(name = "liveat", joinColumns = {
         @JoinColumn(name = "idAdress", referencedColumnName = "idAdress")}, inverseJoinColumns = {
         @JoinColumn(name = "idUser", referencedColumnName = "idUser")})
     @ManyToMany
     private Collection<User> userCollection;
+    
     @JoinTable(name = "location", joinColumns = {
         @JoinColumn(name = "idAdress", referencedColumnName = "idAdress")}, inverseJoinColumns = {
         @JoinColumn(name = "idProduct", referencedColumnName = "idProduct")})
