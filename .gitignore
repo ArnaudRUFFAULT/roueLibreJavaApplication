@@ -59,4 +59,5 @@ src/META-INF/persistence.xml
 
 dist
 
+# setup netbeans #
 nbproject/private/*

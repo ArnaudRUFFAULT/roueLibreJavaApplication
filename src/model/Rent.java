@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,27 +41,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Rent implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_rent")
     private Integer idRent;
+    
     @Basic(optional = false)
     @Column(name = "start")
     @Temporal(TemporalType.DATE)
     private Date start;
+    
     @Basic(optional = false)
     @Column(name = "end")
     @Temporal(TemporalType.DATE)
     private Date end;
-    @Column(name = "state")
-    private String state;
+    
+    public enum State{EN_ATTENTE_DE_CONFIRMATION, CONFIRME, ANNULE, EN_COURS, TERMINE}
+    
+    @Enumerated (value = EnumType.STRING)
+    private State state;
+    
     @JoinColumn(name = "idProduct", referencedColumnName = "idProduct")
     @OneToOne(optional = false)
     private Product idProduct;
+    
     @JoinColumn(name = "idUser", referencedColumnName = "idUser")
     @ManyToOne(optional = false)
     private User idUser;
+    
     @JoinColumn(name = "idUser_borrow", referencedColumnName = "idUser")
     @ManyToOne(optional = false)
     private User idUserborrow;
@@ -101,11 +112,11 @@ public class Rent implements Serializable {
         this.end = end;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 

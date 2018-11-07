@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,30 +45,44 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idProduct")
     private Integer idProduct;
+    
     @Column(name = "photo")
     private String photo;
+    
     @Column(name = "model")
     private String model;
+    
     @Lob
     @Column(name = "description")
     private String description;
+    
     @Basic(optional = false)
     @Column(name = "isAvailable")
     private boolean isAvailable;
-    @Column(name = "state")
-    private String state;
-    @Column(name = "type")
-    private String type;
+    
+    public enum State{NEUF, BON, USAGE, MAUVAIS}
+    
+    @Enumerated (value = EnumType.STRING)
+    private State state;
+    
+    public enum Type{VELO, VELO_MOTORISE, TROTTINETTE, TROTTINETTE_MOTORISE}
+    
+    @Enumerated (value = EnumType.STRING)
+    private Type type;
+    
     @ManyToMany(mappedBy = "productCollection")
     private Collection<Adress> adressCollection;
+    
     @JoinColumn(name = "idUser", referencedColumnName = "idUser")
     @ManyToOne(optional = false)
     private User idUser;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "idProduct")
     private Rent rent;
 
@@ -122,19 +138,19 @@ public class Product implements Serializable {
         this.isAvailable = isAvailable;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

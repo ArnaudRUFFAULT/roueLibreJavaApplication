@@ -73,11 +73,11 @@ public class User implements Serializable {
     @Column(name = "email", unique = true)
     private String email;
     
-    public enum Gender{MALE,FEMALE}
-    
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
+    
+    public enum Gender{MALE,FEMALE}
     
     @Enumerated (value = EnumType.STRING)
     private Gender gender;
