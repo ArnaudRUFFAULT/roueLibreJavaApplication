@@ -40,4 +40,12 @@ public class UserController {
         return u;
     }
     
+    public User update(User u){
+         EntityManager em = emf.createEntityManager();
+         EntityTransaction transac = em.getTransaction();
+         transac.begin();
+         em.merge(u);
+         transac.commit();
+         return u;
+    }
 }
