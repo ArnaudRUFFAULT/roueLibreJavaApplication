@@ -56,3 +56,7 @@ build/*
 !build/build.xml
 
 src/META-INF/persistence.xml
+
+dist
+
+nbproject/private/*
