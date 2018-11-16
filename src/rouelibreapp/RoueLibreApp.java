@@ -29,7 +29,7 @@ public class RoueLibreApp {
 //        userController.create(new User("Yo", "Plait", "Fromage frais", "CMonYop@gmail.com", "woké"));
         User userRead = userController.read("CMonYop@gmail.com");
 //        System.out.println(userRead.getIdUser());
-        userRead.setDescription("String");
+        userRead.setDescription("coucou");
         userController.update(userRead);
         System.out.println(userRead.getDescription());
 
