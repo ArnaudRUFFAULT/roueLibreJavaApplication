@@ -5,9 +5,12 @@
  */
 package rouelibreapp;
 
-import controller.UserController;
+import controller.UserJpaController;
+import controller.exceptions.IllegalOrphanException;
+import controller.exceptions.NonexistentEntityException;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import model.User;
 
 
@@ -20,25 +23,21 @@ public class RoueLibreApp {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalOrphanException, NonexistentEntityException, Exception {
 //        User u = new User("morgana", "laise", "BONNNNJOUUUUUUR", "fds@lkkkkl.Com", "mdp");
 //        u.setGender(Gender.FEMALE);
 //        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("roueLibreAppPU");
-        UserController userController = new UserController(emf);
-//        userController.create(new User("Yo", "Plait", "Fromage frais", "CMonYop@gmail.com", "woké"));
-        User userRead = userController.read("CMonYop@gmail.com");
-//        System.out.println(userRead.getIdUser());
-        userRead.setDescription("coucou");
-        userController.update(userRead);
-        System.out.println(userRead.getDescription());
-
+        UserJpaController userController = new UserJpaController(emf);
+        //userController.create(new User ("Nico", "Ledeglingo", "BabaYaga", "Nicorette@gmail.th", "lolilol"));
         
-//        EntityManager em = emf.createEntityManager();
-//        EntityTransaction transac = em.getTransaction();
-//        transac.begin();
-//        em.persist(u);
-//        transac.commit();
+        
+        
+        
+        Nico.setLastname("Lechaud");
+        userController.edit(Nico);
+        
+
     }
     
 }
